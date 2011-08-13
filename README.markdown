@@ -14,5 +14,5 @@ This view uses two methods of smoothing:
 
 ### Examples
 
-* ![alt text](Examples/examples/1.jpg "Drawing")
-* ![alt text](Examples/examples/3.jpg "Writing")
+* ![alt text](https://github.com/levinunnink/Smooth-Line-View/blob/master/Examples/examples/1.png?raw=true "Drawing")
+* ![alt text](https://github.com/levinunnink/Smooth-Line-View/blob/master/Examples/examples/3.png?raw=true "Writing")
