@@ -43,11 +43,6 @@ static BOOL drawBezier = NO;
 	
 	mouseSwiped = NO;
 	UITouch *touch = [touches anyObject];
-	
-	if ([touch tapCount] == 2) {
-		self.imageView.image = nil;
-		return;
-	}
     [self.pointsArray removeAllObjects];
 	lastPoint = [touch locationInView:self.view];
 	//lastPoint.y -= 20;
