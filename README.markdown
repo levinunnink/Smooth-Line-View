@@ -12,3 +12,7 @@ This view uses two methods of smoothing:
 
 * Still need to find the best threshold to switch to Bezier from Catmull Rom.
 
+### Examples
+
+* ![alt text](Examples/examples/1.jpg "Drawing")
+* ![alt text](Examples/examples/3.jpg "Writing")
