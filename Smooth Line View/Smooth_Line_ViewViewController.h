@@ -17,4 +17,6 @@
     NSMutableArray *pointsArray;
 }
 @property (nonatomic,retain) UIImageView *imageView;
+-(IBAction)toggleDrawMethod:(id)sender;
+-(IBAction)clear:(id)sender;
 @end
