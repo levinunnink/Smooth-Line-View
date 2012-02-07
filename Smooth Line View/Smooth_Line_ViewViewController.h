@@ -7,13 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "SmoothLineView.h"
 @interface Smooth_Line_ViewViewController : UIViewController {
     @private
     CGPoint lastPoint;
 	BOOL mouseSwiped;	
 	int mouseMoved;
-    UIImageView *imageView;
+    UIImageView *renderView;
     NSMutableArray *pointsArray;
 }
 @property (nonatomic,retain) UIImageView *imageView;

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6B250CCD13F9ED20002A5D9D /* SmoothLineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B250CCC13F9ED20002A5D9D /* SmoothLineView.m */; };
+		6B8244E614E0FF67007F2487 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B250CCF13FA2127002A5D9D /* QuartzCore.framework */; };
 		6B93BE6F13F3374200DFAB23 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B93BE6E13F3374200DFAB23 /* UIKit.framework */; };
 		6B93BE7113F3374200DFAB23 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B93BE7013F3374200DFAB23 /* Foundation.framework */; };
 		6B93BE7313F3374200DFAB23 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B93BE7213F3374200DFAB23 /* CoreGraphics.framework */; };
@@ -26,6 +28,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6B250CCB13F9ED20002A5D9D /* SmoothLineView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SmoothLineView.h; sourceTree = "<group>"; };
+		6B250CCC13F9ED20002A5D9D /* SmoothLineView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SmoothLineView.m; sourceTree = "<group>"; };
+		6B250CCF13FA2127002A5D9D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		6B93BE6A13F3374200DFAB23 /* Smooth Line View.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Smooth Line View.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6B93BE6E13F3374200DFAB23 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		6B93BE7013F3374200DFAB23 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -62,6 +67,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6B8244E614E0FF67007F2487 /* QuartzCore.framework in Frameworks */,
 				6B93BE6F13F3374200DFAB23 /* UIKit.framework in Frameworks */,
 				6B93BE7113F3374200DFAB23 /* Foundation.framework in Frameworks */,
 				6B93BE7313F3374200DFAB23 /* CoreGraphics.framework in Frameworks */,
@@ -91,6 +97,7 @@
 		6B93BE6D13F3374200DFAB23 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6B250CCF13FA2127002A5D9D /* QuartzCore.framework */,
 				6B93BE9113F337B000DFAB23 /* spline */,
 				6B93BE6E13F3374200DFAB23 /* UIKit.framework */,
 				6B93BE7013F3374200DFAB23 /* Foundation.framework */,
@@ -108,6 +115,8 @@
 				6B93BE8313F3374200DFAB23 /* Smooth_Line_ViewViewController.h */,
 				6B93BE8413F3374200DFAB23 /* Smooth_Line_ViewViewController.m */,
 				6B93BE8613F3374200DFAB23 /* Smooth_Line_ViewViewController.xib */,
+				6B250CCB13F9ED20002A5D9D /* SmoothLineView.h */,
+				6B250CCC13F9ED20002A5D9D /* SmoothLineView.m */,
 				6B93BE7513F3374200DFAB23 /* Supporting Files */,
 			);
 			path = "Smooth Line View";
@@ -219,6 +228,7 @@
 				6B93BEA513F337B000DFAB23 /* NSArray_PointArray.m in Sources */,
 				6B93BEA613F337B000DFAB23 /* QuadraticBezierCurve.m in Sources */,
 				6B93BEA713F337B000DFAB23 /* Spline.m in Sources */,
+				6B250CCD13F9ED20002A5D9D /* SmoothLineView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -307,7 +317,7 @@
 				INFOPLIST_FILE = "Smooth Line View/Smooth Line View-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "8B142C7E-87C8-4883-BDEB-3FEE9E77AD18";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "0B2F180D-9F0A-43E9-92F9-4817DD8AF357";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -342,6 +352,7 @@
 				6B93BE8D13F3374200DFAB23 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
