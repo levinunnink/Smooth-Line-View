@@ -51,7 +51,6 @@ CGPoint midPoint(CGPoint p1, CGPoint p2)
     previousPoint1 = [touch previousLocationInView:self];
     previousPoint2 = [touch previousLocationInView:self];
     currentPoint = [touch locationInView:self];
-    
 }
 
 -(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
@@ -62,7 +61,6 @@ CGPoint midPoint(CGPoint p1, CGPoint p2)
     previousPoint2  = previousPoint1;
     previousPoint1  = [touch previousLocationInView:self];
     currentPoint    = [touch locationInView:self];
-    
     
     // calculate mid point
     CGPoint mid1    = midPoint(previousPoint1, previousPoint2); 
@@ -87,25 +85,8 @@ CGPoint midPoint(CGPoint p1, CGPoint p2)
 	curImage = UIGraphicsGetImageFromCurrentImageContext();
     [curImage retain];
 	UIGraphicsEndImageContext();
-
     
     [self setNeedsDisplayInRect:drawBox];
-    
-//    UIGraphicsBeginImageContext(self.imageView.frame.size);
-//    CGContextRef context = UIGraphicsGetCurrentContext(); 
-//    [self.imageView.image drawInRect:CGRectMake(0, 0, self.imageView.frame.size.width, self.imageView.frame.size.height)];
-//    
-//    CGContextMoveToPoint(context, mid1.x, mid1.y);
-//    // Use QuadCurve is the key
-//    CGContextAddQuadCurveToPoint(context, previousPoint1.x, previousPoint1.y, mid2.x, mid2.y); 
-//    
-//    CGContextSetLineCap(context, kCGLineCapRound);
-//    CGContextSetLineWidth(context, 5.0);
-//    CGContextSetRGBStrokeColor(context, 1.0, 0.0, 0.0, 1.0);
-//    CGContextStrokePath(context);
-//    
-//    self.imageView.image = UIGraphicsGetImageFromCurrentImageContext();
-//    UIGraphicsEndImageContext();
     
 }
 
@@ -118,14 +99,10 @@ CGPoint midPoint(CGPoint p1, CGPoint p2)
 
     CGContextRef context = UIGraphicsGetCurrentContext(); 
     
-    //[[self layer] drawInContext:context];
-
     [self.layer renderInContext:context];
 
     CGContextMoveToPoint(context, mid1.x, mid1.y);
-    // Use QuadCurve is the key
     CGContextAddQuadCurveToPoint(context, previousPoint1.x, previousPoint1.y, mid2.x, mid2.y); 
-    
     CGContextSetLineCap(context, kCGLineCapRound);
     CGContextSetLineWidth(context, self.lineWidth);
     CGContextSetStrokeColorWithColor(context, self.lineColor.CGColor);
