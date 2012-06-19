@@ -51,6 +51,8 @@ CGPoint midPoint(CGPoint p1, CGPoint p2)
     previousPoint1 = [touch previousLocationInView:self];
     previousPoint2 = [touch previousLocationInView:self];
     currentPoint = [touch locationInView:self];
+    
+    [self touchesMoved:touches withEvent:event];
 }
 
 -(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
