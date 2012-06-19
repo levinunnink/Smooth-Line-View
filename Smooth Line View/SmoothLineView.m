@@ -48,6 +48,12 @@ CGPoint midPoint(CGPoint p1, CGPoint p2)
     
     UITouch *touch = [touches anyObject];
     
+    if (touch.tapCount == 2) {
+        curImage = nil;
+        [self setNeedsDisplay];
+        return;
+    }
+    
     previousPoint1 = [touch previousLocationInView:self];
     previousPoint2 = [touch previousLocationInView:self];
     currentPoint = [touch locationInView:self];
