@@ -24,13 +24,27 @@ CGPoint midPoint(CGPoint p1, CGPoint p2);
 
 #pragma mark -
 
+-(void)setup
+{
+    self.lineWidth = DEFAULT_WIDTH;
+    self.lineColor = DEFAULT_COLOR;
+}
+
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
         self.backgroundColor = [UIColor whiteColor];
-        self.lineWidth = DEFAULT_WIDTH;
-        self.lineColor = DEFAULT_COLOR;
+        [self setup];
+    }
+    return self;
+}
+
+-(id)initWithCoder:(NSCoder *)aDecoder
+{
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        [self setup];
     }
     return self;
 }
