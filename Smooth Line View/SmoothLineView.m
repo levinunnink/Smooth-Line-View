@@ -131,6 +131,12 @@ CGPoint midPoint(CGPoint p1, CGPoint p2)
     
 }
 
+- (void)dealloc
+{
+    self.lineColor = nil;
+    [super dealloc];
+}
+
 @synthesize lineColor,lineWidth;
 @end
 
