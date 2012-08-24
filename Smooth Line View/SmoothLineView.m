@@ -12,6 +12,10 @@
 #define DEFAULT_COLOR [UIColor blackColor]
 #define DEFAULT_WIDTH 5.0f
 
+static const CGFloat kPointMinDistance = 5;
+
+static const CGFloat kPointMinDistanceSquared = kPointMinDistance * kPointMinDistance;
+
 @interface SmoothLineView () 
 
 #pragma mark Private Helper function
@@ -22,44 +26,44 @@ CGPoint midPoint(CGPoint p1, CGPoint p2);
 
 @implementation SmoothLineView
 
-#pragma mark -
+@synthesize lineColor;
+@synthesize lineWidth;
+@synthesize empty = _empty;
 
--(void)setup
-{
-    self.lineWidth = DEFAULT_WIDTH;
-    self.lineColor = DEFAULT_COLOR;
-}
-
-- (id)initWithFrame:(CGRect)frame
-{
-    self = [super initWithFrame:frame];
-    if (self) {
-        self.backgroundColor = [UIColor whiteColor];
-        [self setup];
-    }
-    return self;
-}
-
--(id)initWithCoder:(NSCoder *)aDecoder
-{
+- (id)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
+    
     if (self) {
-        [self setup];
+        self.lineWidth = DEFAULT_WIDTH;
+        self.lineColor = DEFAULT_COLOR;
+        self.empty = YES;
+		path = CGPathCreateMutable();
     }
+    
     return self;
 }
+
+- (id)initWithFrame:(CGRect)frame {
+    self = [super initWithFrame:frame];
+    
+    if (self) {
+        self.lineWidth = DEFAULT_WIDTH;
+        self.lineColor = DEFAULT_COLOR;
+        self.empty = YES;
+		path = CGPathCreateMutable();
+    }
+    
+    return self;
+}
+
 
 #pragma mark Private Helper function
 
-CGPoint midPoint(CGPoint p1, CGPoint p2)
-{
+CGPoint midPoint(CGPoint p1, CGPoint p2) {
     return CGPointMake((p1.x + p2.x) * 0.5, (p1.y + p2.y) * 0.5);
 }
 
-
--(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
-{
-    
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     UITouch *touch = [touches anyObject];
     
     previousPoint1 = [touch previousLocationInView:self];
@@ -69,75 +73,64 @@ CGPoint midPoint(CGPoint p1, CGPoint p2)
     [self touchesMoved:touches withEvent:event];
 }
 
--(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
-{
+- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
+    UITouch *touch = [touches anyObject];
+	
+	CGPoint point = [touch locationInView:self];
+	
+	/* check if the point is farther than min dist from previous */
+    CGFloat dx = point.x - currentPoint.x;
+    CGFloat dy = point.y - currentPoint.y;
+	
+    if ((dx * dx + dy * dy) < kPointMinDistanceSquared) {
+        return;
+    }
     
-    UITouch *touch  = [touches anyObject];
     
-    previousPoint2  = previousPoint1;
-    previousPoint1  = [touch previousLocationInView:self];
-    currentPoint    = [touch locationInView:self];
+    previousPoint2 = previousPoint1;
+    previousPoint1 = [touch previousLocationInView:self];
+    currentPoint = [touch locationInView:self];
     
-    // calculate mid point
-    CGPoint mid1    = midPoint(previousPoint1, previousPoint2); 
-    CGPoint mid2    = midPoint(currentPoint, previousPoint1);
-    
-    CGMutablePathRef path = CGPathCreateMutable();
-    CGPathMoveToPoint(path, NULL, mid1.x, mid1.y);
-    CGPathAddQuadCurveToPoint(path, NULL, previousPoint1.x, previousPoint1.y, mid2.x, mid2.y);
-    CGRect bounds = CGPathGetBoundingBox(path);
-    CGPathRelease(path);
+    CGPoint mid1 = midPoint(previousPoint1, previousPoint2);
+    CGPoint mid2 = midPoint(currentPoint, previousPoint1);
+	CGMutablePathRef subpath = CGPathCreateMutable();
+    CGPathMoveToPoint(subpath, NULL, mid1.x, mid1.y);
+    CGPathAddQuadCurveToPoint(subpath, NULL, previousPoint1.x, previousPoint1.y, mid2.x, mid2.y);
+    CGRect bounds = CGPathGetBoundingBox(subpath);
+	
+	CGPathAddPath(path, NULL, subpath);
+	CGPathRelease(subpath);
     
     CGRect drawBox = bounds;
-    
-    //Pad our values so the bounding box respects our line width
-    drawBox.origin.x        -= self.lineWidth * 2;
-    drawBox.origin.y        -= self.lineWidth * 2;
-    drawBox.size.width      += self.lineWidth * 4;
-    drawBox.size.height     += self.lineWidth * 4;
-    
-    UIGraphicsBeginImageContext(drawBox.size);
-	[self.layer renderInContext:UIGraphicsGetCurrentContext()];
-	curImage = UIGraphicsGetImageFromCurrentImageContext();
-    [curImage retain];
-	UIGraphicsEndImageContext();
+    drawBox.origin.x -= self.lineWidth * 2.0;
+    drawBox.origin.y -= self.lineWidth * 2.0;
+    drawBox.size.width += self.lineWidth * 4.0;
+    drawBox.size.height += self.lineWidth * 4.0;
     
     [self setNeedsDisplayInRect:drawBox];
-    
 }
 
-- (void)drawRect:(CGRect)rect
-{
+- (void)drawRect:(CGRect)rect {
+    [[UIColor whiteColor] set];
+    UIRectFill(rect);
     
-    [curImage drawAtPoint:CGPointMake(0, 0)];
-    CGPoint mid1 = midPoint(previousPoint1, previousPoint2); 
-    CGPoint mid2 = midPoint(currentPoint, previousPoint1);
-
-    CGContextRef context = UIGraphicsGetCurrentContext(); 
+    CGContextRef context = UIGraphicsGetCurrentContext();
     
-    [self.layer renderInContext:context];
-
-    CGContextMoveToPoint(context, mid1.x, mid1.y);
-    CGContextAddQuadCurveToPoint(context, previousPoint1.x, previousPoint1.y, mid2.x, mid2.y); 
+	CGContextAddPath(context, path);
     CGContextSetLineCap(context, kCGLineCapRound);
     CGContextSetLineWidth(context, self.lineWidth);
     CGContextSetStrokeColorWithColor(context, self.lineColor.CGColor);
-
+    
     CGContextStrokePath(context);
-
-    [super drawRect:rect];
     
-    [curImage release];
     
+    self.empty = NO;
 }
 
-- (void)dealloc
-{
-    self.lineColor = nil;
-    [super dealloc];
+-(void)dealloc {
+	CGPathRelease(path);
+	[super dealloc];
 }
 
-@synthesize lineColor,lineWidth;
 @end
-
 
