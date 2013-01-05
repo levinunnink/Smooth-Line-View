@@ -7,3 +7,4 @@ The goal of this project is to create a UIView that can generate smooth lines fr
 
 Many thanks to [Ginamin](http://stackoverflow.com/users/431480/ginamin) for his elegant solution.
 
+The Smooth Line View code is licensed under the MIT License: [http://opensource.org/licenses/MIT](http://opensource.org/licenses/MIT)
