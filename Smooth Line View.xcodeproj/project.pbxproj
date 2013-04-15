@@ -17,13 +17,6 @@
 		6B93BE7F13F3374200DFAB23 /* Smooth_Line_ViewAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B93BE7E13F3374200DFAB23 /* Smooth_Line_ViewAppDelegate.m */; };
 		6B93BE8213F3374200DFAB23 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6B93BE8013F3374200DFAB23 /* MainWindow.xib */; };
 		6B93BE8513F3374200DFAB23 /* Smooth_Line_ViewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B93BE8413F3374200DFAB23 /* Smooth_Line_ViewViewController.m */; };
-		6B93BEA113F337B000DFAB23 /* BezierCurve.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B93BE9313F337B000DFAB23 /* BezierCurve.m */; };
-		6B93BEA213F337B000DFAB23 /* CatmullRomSpline.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B93BE9513F337B000DFAB23 /* CatmullRomSpline.m */; };
-		6B93BEA313F337B000DFAB23 /* CubicBezierCurve.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B93BE9813F337B000DFAB23 /* CubicBezierCurve.m */; };
-		6B93BEA413F337B000DFAB23 /* LinearBezierCurve.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B93BE9A13F337B000DFAB23 /* LinearBezierCurve.m */; };
-		6B93BEA513F337B000DFAB23 /* NSArray_PointArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B93BE9C13F337B000DFAB23 /* NSArray_PointArray.m */; };
-		6B93BEA613F337B000DFAB23 /* QuadraticBezierCurve.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B93BE9E13F337B000DFAB23 /* QuadraticBezierCurve.m */; };
-		6B93BEA713F337B000DFAB23 /* Spline.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B93BEA013F337B000DFAB23 /* Spline.m */; };
 		6BA2EACC15E7F21C009779C5 /* Smooth_Line_ViewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6BA2EACB15E7F21C009779C5 /* Smooth_Line_ViewViewController.xib */; };
 /* End PBXBuildFile section */
 
@@ -221,13 +214,6 @@
 				6B93BE7B13F3374200DFAB23 /* main.m in Sources */,
 				6B93BE7F13F3374200DFAB23 /* Smooth_Line_ViewAppDelegate.m in Sources */,
 				6B93BE8513F3374200DFAB23 /* Smooth_Line_ViewViewController.m in Sources */,
-				6B93BEA113F337B000DFAB23 /* BezierCurve.m in Sources */,
-				6B93BEA213F337B000DFAB23 /* CatmullRomSpline.m in Sources */,
-				6B93BEA313F337B000DFAB23 /* CubicBezierCurve.m in Sources */,
-				6B93BEA413F337B000DFAB23 /* LinearBezierCurve.m in Sources */,
-				6B93BEA513F337B000DFAB23 /* NSArray_PointArray.m in Sources */,
-				6B93BEA613F337B000DFAB23 /* QuadraticBezierCurve.m in Sources */,
-				6B93BEA713F337B000DFAB23 /* Spline.m in Sources */,
 				6B250CCD13F9ED20002A5D9D /* SmoothLineView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
