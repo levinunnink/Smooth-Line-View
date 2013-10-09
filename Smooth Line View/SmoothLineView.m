@@ -9,8 +9,9 @@
 #import "SmoothLineView.h"
 #import <QuartzCore/QuartzCore.h>
 
-#define DEFAULT_COLOR [UIColor blackColor]
-#define DEFAULT_WIDTH 5.0f
+#define DEFAULT_COLOR               [UIColor blackColor]
+#define DEFAULT_WIDTH               5.0f
+#define DEFAULT_BACKGROUND_COLOR    [UIColor whiteColor]
 
 static const CGFloat kPointMinDistance = 5;
 
@@ -36,6 +37,7 @@ CGPoint midPoint(CGPoint p1, CGPoint p2);
     if (self) {
         self.lineWidth = DEFAULT_WIDTH;
         self.lineColor = DEFAULT_COLOR;
+        // NOTE: do not change the backgroundColor here, so it can be set in IB.
         self.empty = YES;
 		path = CGPathCreateMutable();
     }
@@ -49,6 +51,7 @@ CGPoint midPoint(CGPoint p1, CGPoint p2);
     if (self) {
         self.lineWidth = DEFAULT_WIDTH;
         self.lineColor = DEFAULT_COLOR;
+        self.backgroundColor = DEFAULT_BACKGROUND_COLOR;
         self.empty = YES;
 		path = CGPathCreateMutable();
     }
@@ -111,7 +114,7 @@ CGPoint midPoint(CGPoint p1, CGPoint p2) {
 }
 
 - (void)drawRect:(CGRect)rect {
-    [[UIColor whiteColor] set];
+    [self.backgroundColor set];
     UIRectFill(rect);
     
     CGContextRef context = UIGraphicsGetCurrentContext();
