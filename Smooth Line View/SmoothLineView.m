@@ -49,6 +49,8 @@ CGPoint midPoint(CGPoint p1, CGPoint p2);
 @synthesize lineWidth;
 @synthesize empty = _empty;
 
+#pragma mark UIView lifecycle methods
+
 - (id)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     
@@ -77,12 +79,36 @@ CGPoint midPoint(CGPoint p1, CGPoint p2);
     return self;
 }
 
+- (void)drawRect:(CGRect)rect {
+  [self.backgroundColor set];
+  UIRectFill(rect);
+  
+  CGContextRef context = UIGraphicsGetCurrentContext();
+  
+	CGContextAddPath(context, path);
+  CGContextSetLineCap(context, kCGLineCapRound);
+  CGContextSetLineWidth(context, self.lineWidth);
+  CGContextSetStrokeColorWithColor(context, self.lineColor.CGColor);
+  
+  CGContextStrokePath(context);
+  
+  
+  self.empty = NO;
+}
 
-#pragma mark Private Helper function
+-(void)dealloc {
+	CGPathRelease(path);
+	[super dealloc];
+}
+
+
+#pragma mark private Helper function
 
 CGPoint midPoint(CGPoint p1, CGPoint p2) {
     return CGPointMake((p1.x + p2.x) * 0.5, (p1.y + p2.y) * 0.5);
 }
+
+#pragma mark Touch event handlers
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     UITouch *touch = [touches anyObject];
@@ -131,27 +157,6 @@ CGPoint midPoint(CGPoint p1, CGPoint p2) {
     [self setNeedsDisplayInRect:drawBox];
 }
 
-- (void)drawRect:(CGRect)rect {
-    [self.backgroundColor set];
-    UIRectFill(rect);
-    
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    
-	CGContextAddPath(context, path);
-    CGContextSetLineCap(context, kCGLineCapRound);
-    CGContextSetLineWidth(context, self.lineWidth);
-    CGContextSetStrokeColorWithColor(context, self.lineColor.CGColor);
-    
-    CGContextStrokePath(context);
-    
-    
-    self.empty = NO;
-}
-
--(void)dealloc {
-	CGPathRelease(path);
-	[super dealloc];
-}
 
 @end
 
