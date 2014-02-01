@@ -44,14 +44,12 @@ CGPoint midPoint(CGPoint p1, CGPoint p2);
   CGPoint currentPoint;
   CGPoint previousPoint1;
   CGPoint previousPoint2;
-  CGFloat lineWidth;
   UIColor *lineColor;
 	
 	CGMutablePathRef path;
 }
 
 @synthesize lineColor;
-@synthesize lineWidth;
 @synthesize empty = _empty;
 
 #pragma mark UIView lifecycle methods
