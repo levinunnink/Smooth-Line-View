@@ -31,7 +31,7 @@
 
 - (void)viewDidLoad
 {
-    [self.view addSubview:[[[SmoothLineView alloc] initWithFrame:self.view.bounds ] autorelease]];
+    [self.view addSubview:[[SmoothLineView alloc] initWithFrame:self.view.bounds ]];
 }
 
 @end

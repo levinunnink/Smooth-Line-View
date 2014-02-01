@@ -39,7 +39,7 @@
 	CGMutablePathRef path;
 }
 
-@property (nonatomic, retain) UIColor *lineColor;
+@property (nonatomic, strong) UIColor *lineColor;
 @property (readwrite) CGFloat lineWidth;
 @property (assign, nonatomic) BOOL empty;
 

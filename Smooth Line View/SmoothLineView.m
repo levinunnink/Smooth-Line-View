@@ -94,7 +94,6 @@ CGPoint midPoint(CGPoint p1, CGPoint p2);
 
 -(void)dealloc {
 	CGPathRelease(path);
-	[super dealloc];
 }
 
 
