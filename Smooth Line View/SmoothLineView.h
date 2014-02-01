@@ -35,7 +35,6 @@
     CGPoint previousPoint2;
     CGFloat lineWidth;
     UIColor *lineColor;
-    UIImage *curImage;
 	
 	CGMutablePathRef path;
 }
