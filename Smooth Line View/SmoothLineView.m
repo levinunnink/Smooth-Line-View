@@ -39,7 +39,16 @@ static const CGFloat kPointMinDistanceSquared = kPointMinDistance * kPointMinDis
 CGPoint midPoint(CGPoint p1, CGPoint p2);
 @end
 
-@implementation SmoothLineView
+@implementation SmoothLineView {
+@private
+  CGPoint currentPoint;
+  CGPoint previousPoint1;
+  CGPoint previousPoint2;
+  CGFloat lineWidth;
+  UIColor *lineColor;
+	
+	CGMutablePathRef path;
+}
 
 @synthesize lineColor;
 @synthesize lineWidth;

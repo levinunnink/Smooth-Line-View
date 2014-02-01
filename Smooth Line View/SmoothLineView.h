@@ -28,16 +28,7 @@
 
 
 
-@interface SmoothLineView : UIView {
-@private
-  CGPoint currentPoint;
-  CGPoint previousPoint1;
-  CGPoint previousPoint2;
-  CGFloat lineWidth;
-  UIColor *lineColor;
-	
-	CGMutablePathRef path;
-}
+@interface SmoothLineView : UIView 
 
 @property (nonatomic, strong) UIColor *lineColor;
 @property (readwrite) CGFloat lineWidth;
