@@ -30,11 +30,11 @@
 
 @interface SmoothLineView : UIView {
 @private
-    CGPoint currentPoint;
-    CGPoint previousPoint1;
-    CGPoint previousPoint2;
-    CGFloat lineWidth;
-    UIColor *lineColor;
+  CGPoint currentPoint;
+  CGPoint previousPoint1;
+  CGPoint previousPoint2;
+  CGFloat lineWidth;
+  UIColor *lineColor;
 	
 	CGMutablePathRef path;
 }
