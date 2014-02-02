@@ -34,4 +34,6 @@
 @property (nonatomic, assign) CGFloat lineWidth;
 @property (nonatomic, assign) BOOL empty;
 
+-(void)clear;
+
 @end

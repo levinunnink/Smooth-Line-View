@@ -164,6 +164,14 @@ CGPoint midPoint(CGPoint p1, CGPoint p2) {
   [self setNeedsDisplayInRect:drawBox];
 }
 
+#pragma mark interface
+
+-(void)clear {
+  CGMutablePathRef oldPath = _path;
+  CFRelease(oldPath);
+  _path = CGPathCreateMutable();
+  [self setNeedsDisplay];
+}
 
 @end
 
