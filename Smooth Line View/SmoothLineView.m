@@ -48,8 +48,6 @@ CGPoint midPoint(CGPoint p1, CGPoint p2);
 	CGMutablePathRef path;
 }
 
-@synthesize empty = _empty;
-
 #pragma mark UIView lifecycle methods
 
 - (id)initWithCoder:(NSCoder *)aDecoder {

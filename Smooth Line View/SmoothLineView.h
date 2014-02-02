@@ -32,6 +32,6 @@
 
 @property (nonatomic, strong) UIColor *lineColor;
 @property (nonatomic, assign) CGFloat lineWidth;
-@property (assign, nonatomic) BOOL empty;
+@property (nonatomic, assign) BOOL empty;
 
 @end
