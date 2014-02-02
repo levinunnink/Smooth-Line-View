@@ -35,9 +35,9 @@ static const CGFloat kPointMinDistance = 0;
 static const CGFloat kPointMinDistanceSquared = kPointMinDistance * kPointMinDistance;
 
 @interface SmoothLineView ()
-@property (nonatomic,assign) CGPoint theCurrentPoint;
-@property (nonatomic,assign) CGPoint thePreviousPoint1;
-@property (nonatomic,assign) CGPoint thePreviousPoint2;
+@property (nonatomic,assign) CGPoint currentPoint;
+@property (nonatomic,assign) CGPoint previousPoint;
+@property (nonatomic,assign) CGPoint previousPreviousPoint;
 
 #pragma mark Private Helper function
 CGPoint midPoint(CGPoint p1, CGPoint p2);
@@ -111,9 +111,9 @@ CGPoint midPoint(CGPoint p1, CGPoint p2) {
   UITouch *touch = [touches anyObject];
 
   // initializes our point records to current location
-  self.thePreviousPoint1 = [touch previousLocationInView:self];
-  self.thePreviousPoint2 = [touch previousLocationInView:self];
-  self.theCurrentPoint = [touch locationInView:self];
+  self.previousPoint = [touch previousLocationInView:self];
+  self.previousPreviousPoint = [touch previousLocationInView:self];
+  self.currentPoint = [touch locationInView:self];
 
   // call touchesMoved:withEvent:, to possibly draw on zero movement
   [self touchesMoved:touches withEvent:event];
@@ -125,8 +125,8 @@ CGPoint midPoint(CGPoint p1, CGPoint p2) {
 	CGPoint point = [touch locationInView:self];
 	
 	// if the finger has moved less than the min dist ...
-  CGFloat dx = point.x - self.theCurrentPoint.x;
-  CGFloat dy = point.y - self.theCurrentPoint.y;
+  CGFloat dx = point.x - self.currentPoint.x;
+  CGFloat dy = point.y - self.currentPoint.y;
 	
   if ((dx * dx + dy * dy) < kPointMinDistanceSquared) {
     // ... then ignore this movement
@@ -134,19 +134,19 @@ CGPoint midPoint(CGPoint p1, CGPoint p2) {
   }
   
   // update points: previousPrevious -> mid1 -> previous -> mid2 -> current
-  self.thePreviousPoint2 = self.thePreviousPoint1;
-  self.thePreviousPoint1 = [touch previousLocationInView:self];
-  self.theCurrentPoint = [touch locationInView:self];
+  self.previousPreviousPoint = self.previousPoint;
+  self.previousPoint = [touch previousLocationInView:self];
+  self.currentPoint = [touch locationInView:self];
   
-  CGPoint mid1 = midPoint(self.thePreviousPoint1, self.thePreviousPoint2);
-  CGPoint mid2 = midPoint(self.theCurrentPoint, self.thePreviousPoint1);
+  CGPoint mid1 = midPoint(self.previousPoint, self.previousPreviousPoint);
+  CGPoint mid2 = midPoint(self.currentPoint, self.previousPoint);
 
   // to represent the finger movement, create a new path segment,
   // a quadratic bezier path from mid1 to mid2, using previous as a control point
   CGMutablePathRef subpath = CGPathCreateMutable();
   CGPathMoveToPoint(subpath, NULL, mid1.x, mid1.y);
   CGPathAddQuadCurveToPoint(subpath, NULL,
-                            self.thePreviousPoint1.x, self.thePreviousPoint1.y,
+                            self.previousPoint.x, self.previousPoint.y,
                             mid2.x, mid2.y);
   
   // compute the rect containing the new segment plus padding for drawn line
