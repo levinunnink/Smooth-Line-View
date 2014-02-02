@@ -54,11 +54,11 @@ CGPoint midPoint(CGPoint p1, CGPoint p2);
   self = [super initWithCoder:aDecoder];
   
   if (self) {
+    // NOTE: do not change the backgroundColor here, so it can be set in IB.
+		_path = CGPathCreateMutable();
     _lineWidth = DEFAULT_WIDTH;
     _lineColor = DEFAULT_COLOR;
     _empty = YES;
-    // NOTE: do not change the backgroundColor here, so it can be set in IB.
-		_path = CGPathCreateMutable();
   }
   
   return self;
@@ -68,11 +68,11 @@ CGPoint midPoint(CGPoint p1, CGPoint p2);
   self = [super initWithFrame:frame];
   
   if (self) {
+    self.backgroundColor = DEFAULT_BACKGROUND_COLOR;
+		_path = CGPathCreateMutable();
     _lineWidth = DEFAULT_WIDTH;
     _lineColor = DEFAULT_COLOR;
     _empty = YES;
-    self.backgroundColor = DEFAULT_BACKGROUND_COLOR;
-		_path = CGPathCreateMutable();
   }
   
   return self;
