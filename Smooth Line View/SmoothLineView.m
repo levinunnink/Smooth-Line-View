@@ -45,7 +45,7 @@ CGPoint midPoint(CGPoint p1, CGPoint p2);
 
 @implementation SmoothLineView {
 @private
-	CGMutablePathRef path;
+	CGMutablePathRef _path;
 }
 
 #pragma mark UIView lifecycle methods
@@ -58,7 +58,7 @@ CGPoint midPoint(CGPoint p1, CGPoint p2);
     _lineColor = DEFAULT_COLOR;
     _empty = YES;
     // NOTE: do not change the backgroundColor here, so it can be set in IB.
-		path = CGPathCreateMutable();
+		_path = CGPathCreateMutable();
   }
   
   return self;
@@ -72,7 +72,7 @@ CGPoint midPoint(CGPoint p1, CGPoint p2);
     _lineColor = DEFAULT_COLOR;
     _empty = YES;
     self.backgroundColor = DEFAULT_BACKGROUND_COLOR;
-		path = CGPathCreateMutable();
+		_path = CGPathCreateMutable();
   }
   
   return self;
@@ -84,7 +84,7 @@ CGPoint midPoint(CGPoint p1, CGPoint p2);
   
   CGContextRef context = UIGraphicsGetCurrentContext();
   
-	CGContextAddPath(context, path);
+	CGContextAddPath(context, _path);
   CGContextSetLineCap(context, kCGLineCapRound);
   CGContextSetLineWidth(context, self.lineWidth);
   CGContextSetStrokeColorWithColor(context, self.lineColor.CGColor);
@@ -96,7 +96,7 @@ CGPoint midPoint(CGPoint p1, CGPoint p2);
 }
 
 -(void)dealloc {
-	CGPathRelease(path);
+	CGPathRelease(_path);
 }
 
 
@@ -142,7 +142,7 @@ CGPoint midPoint(CGPoint p1, CGPoint p2) {
   CGPathAddQuadCurveToPoint(subpath, NULL, self.thePreviousPoint1.x, self.thePreviousPoint1.y, mid2.x, mid2.y);
   CGRect bounds = CGPathGetBoundingBox(subpath);
 	
-	CGPathAddPath(path, NULL, subpath);
+	CGPathAddPath(_path, NULL, subpath);
 	CGPathRelease(subpath);
   
   CGRect drawBox = bounds;
