@@ -54,10 +54,10 @@ CGPoint midPoint(CGPoint p1, CGPoint p2);
   self = [super initWithCoder:aDecoder];
   
   if (self) {
-    self.lineWidth = DEFAULT_WIDTH;
-    self.lineColor = DEFAULT_COLOR;
+    _lineWidth = DEFAULT_WIDTH;
+    _lineColor = DEFAULT_COLOR;
+    _empty = YES;
     // NOTE: do not change the backgroundColor here, so it can be set in IB.
-    self.empty = YES;
 		path = CGPathCreateMutable();
   }
   
@@ -68,10 +68,10 @@ CGPoint midPoint(CGPoint p1, CGPoint p2);
   self = [super initWithFrame:frame];
   
   if (self) {
-    self.lineWidth = DEFAULT_WIDTH;
-    self.lineColor = DEFAULT_COLOR;
+    _lineWidth = DEFAULT_WIDTH;
+    _lineColor = DEFAULT_COLOR;
+    _empty = YES;
     self.backgroundColor = DEFAULT_BACKGROUND_COLOR;
-    self.empty = YES;
 		path = CGPathCreateMutable();
   }
   
@@ -130,7 +130,6 @@ CGPoint midPoint(CGPoint p1, CGPoint p2) {
   if ((dx * dx + dy * dy) < kPointMinDistanceSquared) {
     return;
   }
-  
   
   self.thePreviousPoint2 = self.thePreviousPoint1;
   self.thePreviousPoint1 = [touch previousLocationInView:self];
