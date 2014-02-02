@@ -35,16 +35,16 @@ static const CGFloat kPointMinDistance = 5;
 static const CGFloat kPointMinDistanceSquared = kPointMinDistance * kPointMinDistance;
 
 @interface SmoothLineView ()
+@property (nonatomic,assign) CGPoint theCurrentPoint;
+@property (nonatomic,assign) CGPoint thePreviousPoint1;
+@property (nonatomic,assign) CGPoint thePreviousPoint2;
+
 #pragma mark Private Helper function
 CGPoint midPoint(CGPoint p1, CGPoint p2);
 @end
 
 @implementation SmoothLineView {
 @private
-  CGPoint currentPoint;
-  CGPoint previousPoint1;
-  CGPoint previousPoint2;
-	
 	CGMutablePathRef path;
 }
 
@@ -113,9 +113,9 @@ CGPoint midPoint(CGPoint p1, CGPoint p2) {
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
   UITouch *touch = [touches anyObject];
   
-  previousPoint1 = [touch previousLocationInView:self];
-  previousPoint2 = [touch previousLocationInView:self];
-  currentPoint = [touch locationInView:self];
+  self.thePreviousPoint1 = [touch previousLocationInView:self];
+  self.thePreviousPoint2 = [touch previousLocationInView:self];
+  self.theCurrentPoint = [touch locationInView:self];
   
   [self touchesMoved:touches withEvent:event];
 }
@@ -126,23 +126,23 @@ CGPoint midPoint(CGPoint p1, CGPoint p2) {
 	CGPoint point = [touch locationInView:self];
 	
 	/* check if the point is farther than min dist from previous */
-  CGFloat dx = point.x - currentPoint.x;
-  CGFloat dy = point.y - currentPoint.y;
+  CGFloat dx = point.x - self.theCurrentPoint.x;
+  CGFloat dy = point.y - self.theCurrentPoint.y;
 	
   if ((dx * dx + dy * dy) < kPointMinDistanceSquared) {
     return;
   }
   
   
-  previousPoint2 = previousPoint1;
-  previousPoint1 = [touch previousLocationInView:self];
-  currentPoint = [touch locationInView:self];
+  self.thePreviousPoint2 = self.thePreviousPoint1;
+  self.thePreviousPoint1 = [touch previousLocationInView:self];
+  self.theCurrentPoint = [touch locationInView:self];
   
-  CGPoint mid1 = midPoint(previousPoint1, previousPoint2);
-  CGPoint mid2 = midPoint(currentPoint, previousPoint1);
-	CGMutablePathRef subpath = CGPathCreateMutable();
+  CGPoint mid1 = midPoint(self.thePreviousPoint1, self.thePreviousPoint2);
+  CGPoint mid2 = midPoint(self.theCurrentPoint, self.thePreviousPoint1);
+  CGMutablePathRef subpath = CGPathCreateMutable();
   CGPathMoveToPoint(subpath, NULL, mid1.x, mid1.y);
-  CGPathAddQuadCurveToPoint(subpath, NULL, previousPoint1.x, previousPoint1.y, mid2.x, mid2.y);
+  CGPathAddQuadCurveToPoint(subpath, NULL, self.thePreviousPoint1.x, self.thePreviousPoint1.y, mid2.x, mid2.y);
   CGRect bounds = CGPathGetBoundingBox(subpath);
 	
 	CGPathAddPath(path, NULL, subpath);
