@@ -151,11 +151,7 @@ CGPoint midPoint(CGPoint p1, CGPoint p2) {
   
   // compute the rect containing the new segment plus padding for drawn line
   CGRect bounds = CGPathGetBoundingBox(subpath);
-  CGRect drawBox = bounds;
-  drawBox.origin.x -= self.lineWidth * 2.0;
-  drawBox.origin.y -= self.lineWidth * 2.0;
-  drawBox.size.width += self.lineWidth * 4.0;
-  drawBox.size.height += self.lineWidth * 4.0;
+  CGRect drawBox = CGRectInset(bounds, -2.0 * self.lineWidth, -2.0 * self.lineWidth);
   
   // append the quad curve to the accumulated path so far.
 	CGPathAddPath(_path, NULL, subpath);
