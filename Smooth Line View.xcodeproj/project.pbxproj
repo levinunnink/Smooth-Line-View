@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5EF58F54189D8AF40024C782 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5EF58F53189D8AF40024C782 /* Default-568h@2x.png */; };
 		6B250CCD13F9ED20002A5D9D /* SmoothLineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B250CCC13F9ED20002A5D9D /* SmoothLineView.m */; };
 		6B8244E614E0FF67007F2487 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B250CCF13FA2127002A5D9D /* QuartzCore.framework */; };
 		6B93BE6F13F3374200DFAB23 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B93BE6E13F3374200DFAB23 /* UIKit.framework */; };
@@ -21,6 +22,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5EF58F53189D8AF40024C782 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		6B250CCB13F9ED20002A5D9D /* SmoothLineView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SmoothLineView.h; sourceTree = "<group>"; };
 		6B250CCC13F9ED20002A5D9D /* SmoothLineView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SmoothLineView.m; sourceTree = "<group>"; };
 		6B250CCF13FA2127002A5D9D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -37,21 +39,6 @@
 		6B93BE8113F3374200DFAB23 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow.xib; sourceTree = "<group>"; };
 		6B93BE8313F3374200DFAB23 /* Smooth_Line_ViewViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Smooth_Line_ViewViewController.h; sourceTree = "<group>"; };
 		6B93BE8413F3374200DFAB23 /* Smooth_Line_ViewViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Smooth_Line_ViewViewController.m; sourceTree = "<group>"; };
-		6B93BE9213F337B000DFAB23 /* BezierCurve.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BezierCurve.h; sourceTree = "<group>"; };
-		6B93BE9313F337B000DFAB23 /* BezierCurve.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BezierCurve.m; sourceTree = "<group>"; };
-		6B93BE9413F337B000DFAB23 /* CatmullRomSpline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CatmullRomSpline.h; sourceTree = "<group>"; };
-		6B93BE9513F337B000DFAB23 /* CatmullRomSpline.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CatmullRomSpline.m; sourceTree = "<group>"; };
-		6B93BE9613F337B000DFAB23 /* CGPointArithmetic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGPointArithmetic.h; sourceTree = "<group>"; };
-		6B93BE9713F337B000DFAB23 /* CubicBezierCurve.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CubicBezierCurve.h; sourceTree = "<group>"; };
-		6B93BE9813F337B000DFAB23 /* CubicBezierCurve.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CubicBezierCurve.m; sourceTree = "<group>"; };
-		6B93BE9913F337B000DFAB23 /* LinearBezierCurve.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LinearBezierCurve.h; sourceTree = "<group>"; };
-		6B93BE9A13F337B000DFAB23 /* LinearBezierCurve.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LinearBezierCurve.m; sourceTree = "<group>"; };
-		6B93BE9B13F337B000DFAB23 /* NSArray_PointArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSArray_PointArray.h; sourceTree = "<group>"; };
-		6B93BE9C13F337B000DFAB23 /* NSArray_PointArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSArray_PointArray.m; sourceTree = "<group>"; };
-		6B93BE9D13F337B000DFAB23 /* QuadraticBezierCurve.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuadraticBezierCurve.h; sourceTree = "<group>"; };
-		6B93BE9E13F337B000DFAB23 /* QuadraticBezierCurve.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuadraticBezierCurve.m; sourceTree = "<group>"; };
-		6B93BE9F13F337B000DFAB23 /* Spline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Spline.h; sourceTree = "<group>"; };
-		6B93BEA013F337B000DFAB23 /* Spline.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Spline.m; sourceTree = "<group>"; };
 		6BA2EACB15E7F21C009779C5 /* Smooth_Line_ViewViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Smooth_Line_ViewViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -73,6 +60,7 @@
 		6B93BE5F13F3374100DFAB23 = {
 			isa = PBXGroup;
 			children = (
+				5EF58F53189D8AF40024C782 /* Default-568h@2x.png */,
 				6B93BE7413F3374200DFAB23 /* Smooth Line View */,
 				6B93BE6D13F3374200DFAB23 /* Frameworks */,
 				6B93BE6B13F3374200DFAB23 /* Products */,
@@ -91,7 +79,6 @@
 			isa = PBXGroup;
 			children = (
 				6B250CCF13FA2127002A5D9D /* QuartzCore.framework */,
-				6B93BE9113F337B000DFAB23 /* spline */,
 				6B93BE6E13F3374200DFAB23 /* UIKit.framework */,
 				6B93BE7013F3374200DFAB23 /* Foundation.framework */,
 				6B93BE7213F3374200DFAB23 /* CoreGraphics.framework */,
@@ -126,28 +113,6 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		6B93BE9113F337B000DFAB23 /* spline */ = {
-			isa = PBXGroup;
-			children = (
-				6B93BE9213F337B000DFAB23 /* BezierCurve.h */,
-				6B93BE9313F337B000DFAB23 /* BezierCurve.m */,
-				6B93BE9413F337B000DFAB23 /* CatmullRomSpline.h */,
-				6B93BE9513F337B000DFAB23 /* CatmullRomSpline.m */,
-				6B93BE9613F337B000DFAB23 /* CGPointArithmetic.h */,
-				6B93BE9713F337B000DFAB23 /* CubicBezierCurve.h */,
-				6B93BE9813F337B000DFAB23 /* CubicBezierCurve.m */,
-				6B93BE9913F337B000DFAB23 /* LinearBezierCurve.h */,
-				6B93BE9A13F337B000DFAB23 /* LinearBezierCurve.m */,
-				6B93BE9B13F337B000DFAB23 /* NSArray_PointArray.h */,
-				6B93BE9C13F337B000DFAB23 /* NSArray_PointArray.m */,
-				6B93BE9D13F337B000DFAB23 /* QuadraticBezierCurve.h */,
-				6B93BE9E13F337B000DFAB23 /* QuadraticBezierCurve.m */,
-				6B93BE9F13F337B000DFAB23 /* Spline.h */,
-				6B93BEA013F337B000DFAB23 /* Spline.m */,
-			);
-			path = spline;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -174,6 +139,7 @@
 		6B93BE6113F3374100DFAB23 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = culturezoo;
 			};
 			buildConfigurationList = 6B93BE6413F3374100DFAB23 /* Build configuration list for PBXProject "Smooth Line View" */;
@@ -199,6 +165,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6B93BE7913F3374200DFAB23 /* InfoPlist.strings in Resources */,
+				5EF58F54189D8AF40024C782 /* Default-568h@2x.png in Resources */,
 				6B93BE8213F3374200DFAB23 /* MainWindow.xib in Resources */,
 				6BA2EACC15E7F21C009779C5 /* Smooth_Line_ViewViewController.xib in Resources */,
 			);
@@ -244,7 +211,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_UNIVERSAL_IPHONE_OS)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -260,6 +226,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;
 			};
@@ -269,7 +236,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_UNIVERSAL_IPHONE_OS)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -288,15 +254,17 @@
 		6B93BE8C13F3374200DFAB23 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Levi Nunnink (57WGH9SBKB)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Smooth Line View/Smooth Line View-Prefix.pch";
 				GCC_VERSION = "";
 				INFOPLIST_FILE = "Smooth Line View/Smooth Line View-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "0B2F180D-9F0A-43E9-92F9-4817DD8AF357";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "C4486A19-69DA-4716-9E18-6EB2EB68880F";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -304,11 +272,13 @@
 		6B93BE8D13F3374200DFAB23 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Smooth Line View/Smooth Line View-Prefix.pch";
 				GCC_VERSION = "";
 				INFOPLIST_FILE = "Smooth Line View/Smooth Line View-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

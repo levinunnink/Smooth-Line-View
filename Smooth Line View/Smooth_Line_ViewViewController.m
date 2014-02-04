@@ -27,13 +27,29 @@
 
 #import "Smooth_Line_ViewViewController.h"
 
+#import <CoreMotion/CoreMotion.h>
+
+@interface Smooth_Line_ViewViewController ()
+@property (nonatomic) SmoothLineView * canvas;
+@end
+
 @implementation Smooth_Line_ViewViewController
 
 - (void)viewDidLoad
 {
-    [self.view addSubview:[[[SmoothLineView alloc] initWithFrame:self.view.bounds ] autorelease]];
+  SmoothLineView * smoothLineView =[[SmoothLineView alloc] initWithFrame:self.view.bounds ];
+  self.canvas = smoothLineView;
+  [self.view addSubview:smoothLineView];
 }
 
+-(BOOL)canBecomeFirstResponder {
+  return YES;
+}
+
+-(void)motionBegan:(UIEventSubtype)motion withEvent:(UIEvent *)event
+{
+  [self.canvas clear];
+}
 @end
 
 

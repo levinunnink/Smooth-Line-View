@@ -30,8 +30,8 @@
 
 @interface Smooth_Line_ViewAppDelegate : NSObject <UIApplicationDelegate>
 
-@property (nonatomic, retain) IBOutlet UIWindow *window;
+@property (nonatomic, strong) IBOutlet UIWindow *window;
 
-@property (nonatomic, retain) IBOutlet Smooth_Line_ViewViewController *viewController;
+@property (nonatomic, strong) IBOutlet Smooth_Line_ViewViewController *viewController;
 
 @end
