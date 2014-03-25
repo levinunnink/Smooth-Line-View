@@ -30,6 +30,7 @@
 #import <CoreMotion/CoreMotion.h>
 
 @interface Smooth_Line_ViewViewController ()
+@property (strong, nonatomic) IBOutlet UIView *canvasView;
 @property (nonatomic) SmoothLineView * canvas;
 @end
 
@@ -37,19 +38,42 @@
 
 - (void)viewDidLoad
 {
-  SmoothLineView * smoothLineView =[[SmoothLineView alloc] initWithFrame:self.view.bounds ];
-  self.canvas = smoothLineView;
-  [self.view addSubview:smoothLineView];
+    
+    SmoothLineView * smoothLineView = [[SmoothLineView alloc] initWithFrame:CGRectMake(0, 0,
+                                                                                       self.view.frame.size.width,
+                                                                                    self.view.frame.size.height)];
+    self.canvas = smoothLineView;
+    [self.canvasView addSubview:smoothLineView];
+    
 }
 
 -(BOOL)canBecomeFirstResponder {
-  return YES;
+    return YES;
+}
+- (IBAction)buttonDown:(id)sender {
+    
+    [self.canvas clear];
 }
 
 -(void)motionBegan:(UIEventSubtype)motion withEvent:(UIEvent *)event
 {
-  [self.canvas clear];
+    [self.canvas clear];
 }
+
+- (IBAction)savePressed:(id)sender {
+    
+    [self.canvas savePath];
+    
+    
+}
+
+- (IBAction)loadPressed:(id)sender {
+    
+    [self.canvas loadPath];
+    
+}
+
+
 @end
 
 

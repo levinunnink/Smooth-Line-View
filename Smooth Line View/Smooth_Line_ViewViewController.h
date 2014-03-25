@@ -28,4 +28,6 @@
 #import <UIKit/UIKit.h>
 #import "SmoothLineView.h"
 
-@interface Smooth_Line_ViewViewController : UIViewController @end
+@interface Smooth_Line_ViewViewController : UIViewController
+
+@end
