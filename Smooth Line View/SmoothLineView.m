@@ -29,7 +29,7 @@
 
 #define DEFAULT_COLOR               [UIColor blackColor]
 #define DEFAULT_WIDTH               5.0f
-#define DEFAULT_BACKGROUND_COLOR    [UIColor whiteColor]
+#define DEFAULT_BACKGROUND_COLOR    [UIColor clearColor]
 
 static const CGFloat kPointMinDistance = 5.0f;
 static const CGFloat kPointMinDistanceSquared = kPointMinDistance * kPointMinDistance;
@@ -38,6 +38,7 @@ static const CGFloat kPointMinDistanceSquared = kPointMinDistance * kPointMinDis
 @property (nonatomic,assign) CGPoint currentPoint;
 @property (nonatomic,assign) CGPoint previousPoint;
 @property (nonatomic,assign) CGPoint previousPreviousPoint;
+@property (nonatomic, retain) NSMutableArray* points;
 
 #pragma mark Private Helper function
 CGPoint midPoint(CGPoint p1, CGPoint p2);
@@ -49,25 +50,49 @@ CGPoint midPoint(CGPoint p1, CGPoint p2);
 }
 
 #pragma mark UIView lifecycle methods
-
+- (void) encodeWithCoder:(NSCoder *)aCoder {
+    UIBezierPath *test = [[UIBezierPath alloc] init];
+    test.CGPath = _path;
+    [aCoder encodeObject:test forKey:@"path"];
+}
 - (id)initWithCoder:(NSCoder *)aDecoder {
-  self = [super initWithCoder:aDecoder];
+  self = [super init];
   
   if (self) {
     // NOTE: do not change the backgroundColor here, so it can be set in IB.
-		_path = CGPathCreateMutable();
-    _lineWidth = DEFAULT_WIDTH;
-    _lineColor = DEFAULT_COLOR;
-    _empty = YES;
+      _path = CGPathCreateMutable();
+      _lineWidth = 5.0f;
+      _lineColor = [UIColor blackColor];
   }
   
   return self;
+}
+-(void)savePath {
+    UIBezierPath *savePath = [[UIBezierPath alloc] init];
+    savePath.CGPath = _path;
+    NSMutableData *saveData = [[NSMutableData alloc] init];
+    NSKeyedArchiver *archiver = [[NSKeyedArchiver alloc] initForWritingWithMutableData:saveData];
+    [archiver encodeObject:savePath forKey:@"path"];
+    [archiver finishEncoding];
+    
+    NSString *path = [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:@"path.p"];
+    [saveData writeToFile:path atomically:YES];
+}
+-(void)loadPath {
+    NSString *filePath = [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:@"path.p"];
+    NSData* bytesData = [NSData dataWithContentsOfFile:filePath];
+    NSKeyedUnarchiver *unarchiver = [[NSKeyedUnarchiver alloc] initForReadingWithData:bytesData];
+    UIBezierPath *savePath = [unarchiver decodeObjectForKey:@"path"];
+    CGPathAddPath(_path, NULL, savePath.CGPath);
+    [self setNeedsDisplay];
 }
 
 - (id)initWithFrame:(CGRect)frame {
   self = [super initWithFrame:frame];
   
   if (self) {
+      
+      self.points = [[NSMutableArray alloc] init];
     self.backgroundColor = DEFAULT_BACKGROUND_COLOR;
 		_path = CGPathCreateMutable();
     _lineWidth = DEFAULT_WIDTH;
@@ -85,7 +110,7 @@ CGPoint midPoint(CGPoint p1, CGPoint p2);
   
   // get the graphics context and draw the path
   CGContextRef context = UIGraphicsGetCurrentContext();
-	CGContextAddPath(context, _path);
+  CGContextAddPath(context, _path);
   CGContextSetLineCap(context, kCGLineCapRound);
   CGContextSetLineWidth(context, self.lineWidth);
   CGContextSetStrokeColorWithColor(context, self.lineColor.CGColor);
@@ -143,31 +168,37 @@ CGPoint midPoint(CGPoint p1, CGPoint p2) {
 
   // to represent the finger movement, create a new path segment,
   // a quadratic bezier path from mid1 to mid2, using previous as a control point
-  CGMutablePathRef subpath = CGPathCreateMutable();
-  CGPathMoveToPoint(subpath, NULL, mid1.x, mid1.y);
-  CGPathAddQuadCurveToPoint(subpath, NULL,
-                            self.previousPoint.x, self.previousPoint.y,
-                            mid2.x, mid2.y);
-  
-  // compute the rect containing the new segment plus padding for drawn line
-  CGRect bounds = CGPathGetBoundingBox(subpath);
-  CGRect drawBox = CGRectInset(bounds, -2.0 * self.lineWidth, -2.0 * self.lineWidth);
-  
-  // append the quad curve to the accumulated path so far.
+  [self setNeedsDisplayInRect:[self addPointToLine:mid1 mid2:mid2]];
+}
+-(CGRect) addPointToLine:(CGPoint)mid1 mid2:(CGPoint)mid2 {
+    CGMutablePathRef subpath = CGPathCreateMutable();
+    CGPathMoveToPoint(subpath, NULL, mid1.x, mid1.y);
+    CGPathAddQuadCurveToPoint(subpath, NULL,
+                              self.previousPoint.x, self.previousPoint.y,
+                              mid2.x, mid2.y);
+    
+    // compute the rect containing the new segment plus padding for drawn line
+    CGRect bounds = CGPathGetBoundingBox(subpath);
+    CGRect drawBox = CGRectInset(bounds, -2.0 * self.lineWidth, -2.0 * self.lineWidth);
+    
+    // append the quad curve to the accumulated path so far.
 	CGPathAddPath(_path, NULL, subpath);
 	CGPathRelease(subpath);
 
-  [self setNeedsDisplayInRect:drawBox];
+    return drawBox;
 }
-
 #pragma mark interface
 
 -(void)clear {
-  CGMutablePathRef oldPath = _path;
+    CGMutablePathRef oldPath = _path;
   CFRelease(oldPath);
   _path = CGPathCreateMutable();
   [self setNeedsDisplay];
+
+
 }
+
+
 
 @end
 
