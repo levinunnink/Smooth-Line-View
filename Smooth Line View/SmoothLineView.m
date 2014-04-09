@@ -169,5 +169,10 @@ CGPoint midPoint(CGPoint p1, CGPoint p2) {
   [self setNeedsDisplay];
 }
 
+- (UIBezierPath*) path
+{
+    return [UIBezierPath bezierPathWithCGPath:_path];
+}
+
 @end
 

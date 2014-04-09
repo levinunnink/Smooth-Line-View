@@ -36,4 +36,6 @@
 
 -(void)clear;
 
+- (UIBezierPath*) path;
+
 @end
