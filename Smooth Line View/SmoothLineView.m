@@ -34,6 +34,8 @@
 static const CGFloat kPointMinDistance = 5.0f;
 static const CGFloat kPointMinDistanceSquared = kPointMinDistance * kPointMinDistance;
 
+#define kPATH_NSCODING_KEY @"thePathRef"
+
 @interface SmoothLineView ()
 @property (nonatomic,assign) CGPoint currentPoint;
 @property (nonatomic,assign) CGPoint previousPoint;
@@ -49,6 +51,53 @@ CGPoint midPoint(CGPoint p1, CGPoint p2);
 }
 
 #pragma mark UIView lifecycle methods
+
+- (void) encodeRestorableStateWithCoder:(NSCoder *)coder
+{
+  [super encodeRestorableStateWithCoder:coder];
+  
+  // encode the CGMutablePathRef
+  CGPathRef persistentPathRef;
+  if (self->_path) {
+    persistentPathRef = CGPathCreateCopy(self->_path);
+  }
+  else {
+    persistentPathRef = CGPathCreateMutable();
+  }
+  UIBezierPath * bezierPath = [UIBezierPath bezierPathWithCGPath:persistentPathRef];
+  CGPathRelease(persistentPathRef);
+  [coder encodeObject:bezierPath forKey:kPATH_NSCODING_KEY];
+  
+  [coder encodeFloat:self.lineWidth forKey:NSStringFromSelector(@selector(lineWidth))];
+  [coder encodeObject:self.lineColor forKey:NSStringFromSelector(@selector(lineColor))];
+}
+
+- (void) decodeRestorableStateWithCoder:(NSCoder *)coder
+{
+  if ([coder containsValueForKey:kPATH_NSCODING_KEY] &&
+      [coder containsValueForKey:NSStringFromSelector(@selector(lineWidth))] &&
+      [coder containsValueForKey:NSStringFromSelector(@selector(lineColor))])
+  {
+    UIBezierPath * bezierPath = [coder decodeObjectForKey:kPATH_NSCODING_KEY];
+    if (!bezierPath) {
+      // workaround an apparent UIKit bug, where an empty UIBezierPath decodes to nil
+      bezierPath = [UIBezierPath bezierPath];
+    }
+    CGPathRef persistentPathRef  = [bezierPath CGPath];
+    CGMutablePathRef mutablePathRef = CGPathCreateMutableCopy(persistentPathRef);
+    CGMutablePathRef oldPath = self->_path;
+    CFRelease(oldPath);
+    self->_path = mutablePathRef;
+    
+    self.lineWidth = [coder decodeFloatForKey:NSStringFromSelector(@selector(lineWidth))];
+    self.lineColor = [coder decodeObjectForKey:NSStringFromSelector(@selector(lineColor))];
+  }
+  else {
+    NSLog(@"trying to decode from invalid coder");
+  }
+  
+  [super decodeRestorableStateWithCoder:coder];
+}
 
 - (id)initWithCoder:(NSCoder *)aDecoder {
   self = [super initWithCoder:aDecoder];
