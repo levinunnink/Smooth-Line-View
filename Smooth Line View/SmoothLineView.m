@@ -174,5 +174,10 @@ CGPoint midPoint(CGPoint p1, CGPoint p2) {
     return [UIBezierPath bezierPathWithCGPath:_path];
 }
 
+- (void) setPath:(UIBezierPath*) bezierPath
+{
+    _path = CGPathCreateMutableCopy(bezierPath.CGPath) ;
+}
+
 @end
 
