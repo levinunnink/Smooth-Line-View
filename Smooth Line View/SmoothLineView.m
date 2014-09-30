@@ -50,6 +50,11 @@ CGPoint midPoint(CGPoint p1, CGPoint p2);
 
 #pragma mark UIView lifecycle methods
 
++ (Class)layerClass
+{
+    return [CATiledLayer class];
+}
+
 - (id)initWithCoder:(NSCoder *)aDecoder {
   self = [super initWithCoder:aDecoder];
   
