@@ -135,7 +135,7 @@ CGPoint midPoint(CGPoint p1, CGPoint p2) {
   
   // update points: previousPrevious -> mid1 -> previous -> mid2 -> current
   self.previousPreviousPoint = self.previousPoint;
-  self.previousPoint = [touch previousLocationInView:self];
+  self.previousPoint = self.currentPoint;
   self.currentPoint = [touch locationInView:self];
   
   CGPoint mid1 = midPoint(self.previousPoint, self.previousPreviousPoint);
