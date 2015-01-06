@@ -45,36 +45,36 @@ CGPoint midPoint(CGPoint p1, CGPoint p2);
 
 @implementation SmoothLineView {
 @private
-	CGMutablePathRef _path;
+  CGMutablePathRef _path;
 }
 
 #pragma mark UIView lifecycle methods
 
 - (id)initWithCoder:(NSCoder *)aDecoder {
   self = [super initWithCoder:aDecoder];
-  
+
   if (self) {
     // NOTE: do not change the backgroundColor here, so it can be set in IB.
-		_path = CGPathCreateMutable();
+    _path = CGPathCreateMutable();
     _lineWidth = DEFAULT_WIDTH;
     _lineColor = DEFAULT_COLOR;
     _empty = YES;
   }
-  
+
   return self;
 }
 
 - (id)initWithFrame:(CGRect)frame {
   self = [super initWithFrame:frame];
-  
+
   if (self) {
     self.backgroundColor = DEFAULT_BACKGROUND_COLOR;
-		_path = CGPathCreateMutable();
+    _path = CGPathCreateMutable();
     _lineWidth = DEFAULT_WIDTH;
     _lineColor = DEFAULT_COLOR;
     _empty = YES;
   }
-  
+
   return self;
 }
 
@@ -82,21 +82,21 @@ CGPoint midPoint(CGPoint p1, CGPoint p2);
   // clear rect
   [self.backgroundColor set];
   UIRectFill(rect);
-  
+
   // get the graphics context and draw the path
   CGContextRef context = UIGraphicsGetCurrentContext();
-	CGContextAddPath(context, _path);
+  CGContextAddPath(context, _path);
   CGContextSetLineCap(context, kCGLineCapRound);
   CGContextSetLineWidth(context, self.lineWidth);
   CGContextSetStrokeColorWithColor(context, self.lineColor.CGColor);
-  
+
   CGContextStrokePath(context);
-  
+
   self.empty = NO;
 }
 
--(void)dealloc {
-	CGPathRelease(_path);
+- (void)dealloc {
+  CGPathRelease(_path);
 }
 
 #pragma mark private Helper function
@@ -114,30 +114,36 @@ CGPoint midPoint(CGPoint p1, CGPoint p2) {
   self.previousPoint = [touch previousLocationInView:self];
   self.previousPreviousPoint = [touch previousLocationInView:self];
   self.currentPoint = [touch locationInView:self];
-
-  // call touchesMoved:withEvent:, to possibly draw on zero movement
-  [self touchesMoved:touches withEvent:event];
+  [self draw];
 }
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
   UITouch *touch = [touches anyObject];
-	
-	CGPoint point = [touch locationInView:self];
-	
-	// if the finger has moved less than the min dist ...
+
+  CGPoint point = [touch locationInView:self];
+
+  // if the finger has moved less than the min dist ...
   CGFloat dx = point.x - self.currentPoint.x;
   CGFloat dy = point.y - self.currentPoint.y;
-	
-  if ((dx * dx + dy * dy) < kPointMinDistanceSquared) {
-    // ... then ignore this movement
-    return;
+
+  if ((dx * dx + dy * dy) >= kPointMinDistanceSquared) {
+
+    // update points: previousPrevious -> mid1 -> previous -> mid2 -> current
+    self.previousPreviousPoint = self.previousPoint;
+    self.previousPoint = [touch previousLocationInView:self];
+    self.currentPoint = [touch locationInView:self];
+    [self draw];
   }
-  
-  // update points: previousPrevious -> mid1 -> previous -> mid2 -> current
-  self.previousPreviousPoint = self.previousPoint;
-  self.previousPoint = [touch previousLocationInView:self];
-  self.currentPoint = [touch locationInView:self];
-  
+}
+
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+  [self draw];
+}
+
+/**
+ * Computes the path and redraws the canvas
+ */
+- (void)draw {
   CGPoint mid1 = midPoint(self.previousPoint, self.previousPreviousPoint);
   CGPoint mid2 = midPoint(self.currentPoint, self.previousPoint);
 
@@ -148,21 +154,21 @@ CGPoint midPoint(CGPoint p1, CGPoint p2) {
   CGPathAddQuadCurveToPoint(subpath, NULL,
                             self.previousPoint.x, self.previousPoint.y,
                             mid2.x, mid2.y);
-  
+
   // compute the rect containing the new segment plus padding for drawn line
   CGRect bounds = CGPathGetBoundingBox(subpath);
   CGRect drawBox = CGRectInset(bounds, -2.0 * self.lineWidth, -2.0 * self.lineWidth);
-  
+
   // append the quad curve to the accumulated path so far.
-	CGPathAddPath(_path, NULL, subpath);
-	CGPathRelease(subpath);
+  CGPathAddPath(_path, NULL, subpath);
+  CGPathRelease(subpath);
 
   [self setNeedsDisplayInRect:drawBox];
 }
 
 #pragma mark interface
 
--(void)clear {
+- (void)clear {
   CGMutablePathRef oldPath = _path;
   CFRelease(oldPath);
   _path = CGPathCreateMutable();
@@ -170,4 +176,3 @@ CGPoint midPoint(CGPoint p1, CGPoint p2) {
 }
 
 @end
-
