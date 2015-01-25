@@ -36,4 +36,7 @@
 
 -(void)clear;
 
+- (UIBezierPath*) path;
+- (void) setPath: (UIBezierPath*) bezierPath;
+- (BOOL) didChange;
 @end

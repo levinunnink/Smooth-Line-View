@@ -50,6 +50,11 @@ CGPoint midPoint(CGPoint p1, CGPoint p2);
 
 #pragma mark UIView lifecycle methods
 
++ (Class)layerClass
+{
+    return [CATiledLayer class];
+}
+
 - (id)initWithCoder:(NSCoder *)aDecoder {
   self = [super initWithCoder:aDecoder];
   
@@ -167,6 +172,21 @@ CGPoint midPoint(CGPoint p1, CGPoint p2) {
   CFRelease(oldPath);
   _path = CGPathCreateMutable();
   [self setNeedsDisplay];
+}
+
+- (UIBezierPath*) path
+{
+    return [UIBezierPath bezierPathWithCGPath:_path];
+}
+
+- (void) setPath:(UIBezierPath*) bezierPath
+{
+    _path = CGPathCreateMutableCopy(bezierPath.CGPath) ;
+}
+
+- (BOOL) didChange
+{
+    return !self.path.isEmpty;
 }
 
 @end
