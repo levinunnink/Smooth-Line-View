@@ -184,5 +184,10 @@ CGPoint midPoint(CGPoint p1, CGPoint p2) {
     _path = CGPathCreateMutableCopy(bezierPath.CGPath) ;
 }
 
+- (BOOL) didChange
+{
+    return !self.path.isEmpty;
+}
+
 @end
 
